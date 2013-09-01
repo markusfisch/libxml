@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hello>
+	<world name="Earth">
+		<!-- here are the <country> tags -->
+		<country name="USA" year="2012">
+			<city name="Miami">Miami</city>
+			<city name="New York">New York</city>
+			<city name="Boston">Boston</city>
+		</country>
+		<country name="USA" year="2013">
+			<city name="Miami">Welcome to Miami</city>
+			<city name="New York">New York, New York</city>
+			<city name="Boston">Boston Bridge</city>
+		</country>
+		<country name="England">
+			<city name="London">London Bridge</city>
+		</country>
+		<country/>
+		<country name="Nowhere"><![CDATA[the
+<wild >> nature [ with all
+		kinds ]]
+	of << things / in ] it <! ~]]]></country>
+		<country name="Wild"><![CDATA[ more   wild]]
+
+data]]></country>
+	</world>
+</hello>
