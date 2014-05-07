@@ -51,7 +51,7 @@ struct xml_tag_pattern
  * @param s - first character after quote
  * @param q - quote character
  */
-size_t xml_quotedspn( const char *s, char q )
+static size_t xml_quotedspn( const char *s, char q )
 {
 	const char *first = s;
 
@@ -78,7 +78,7 @@ size_t xml_quotedspn( const char *s, char q )
  * @param src - string to append
  * @param src_len - length of string to append
  */
-char *xml_string_append(
+static char *xml_string_append(
 	char **dest,
 	size_t *dest_len,
 	const char *src,
@@ -118,7 +118,7 @@ char *xml_string_append(
  * @param p - parent element
  * @param c - child element
  */
-void xml_element_add(
+static void xml_element_add(
 	struct xml_element *p,
 	struct xml_element *c )
 {
@@ -138,7 +138,7 @@ void xml_element_add(
  *
  * @param parent - parent element
  */
-struct xml_element *xml_element_create( struct xml_element *parent )
+static struct xml_element *xml_element_create( struct xml_element *parent )
 {
 	struct xml_element *e;
 
@@ -161,7 +161,7 @@ struct xml_element *xml_element_create( struct xml_element *parent )
  * @param e - element
  * @param a - attribute
  */
-void xml_attribute_add(
+static void xml_attribute_add(
 	struct xml_element *e,
 	struct xml_attribute *a )
 {
@@ -179,7 +179,7 @@ void xml_attribute_add(
  *
  * @param parent - parent element
  */
-struct xml_attribute *xml_attribute_create( struct xml_element *parent )
+static struct xml_attribute *xml_attribute_create( struct xml_element *parent )
 {
 	struct xml_attribute *a;
 
@@ -203,7 +203,7 @@ struct xml_attribute *xml_attribute_create( struct xml_element *parent )
  * @param d - begin of data
  * @param l - length of data
  */
-int xml_value_append( struct xml_state *st, const char *d, size_t l )
+static int xml_value_append( struct xml_state *st, const char *d, size_t l )
 {
 	if( !st->length &&
 		!(st->current = xml_element_create( st->current )) )
@@ -226,7 +226,7 @@ int xml_value_append( struct xml_state *st, const char *d, size_t l )
  * @param d - begin of data
  * @param l - length of data
  */
-int xml_key_append( struct xml_state *st, const char *d, size_t l )
+static int xml_key_append( struct xml_state *st, const char *d, size_t l )
 {
 	if( !st->current )
 		return -1;
@@ -265,7 +265,7 @@ int xml_key_append( struct xml_state *st, const char *d, size_t l )
  * @param e - element
  * @param from - first character after tag name
  */
-int xml_parse_attributes( struct xml_element *e, char *from )
+static int xml_parse_attributes( struct xml_element *e, char *from )
 {
 	while( *from )
 	{
@@ -344,14 +344,14 @@ int xml_parse_attributes( struct xml_element *e, char *from )
  ****************************************************************************/
 
 /* forward declarations */
-const char *xml_parse_content( struct xml_state *, const char * );
+static const char *xml_parse_content( struct xml_state *, const char * );
 
 /**
  * Close element
  *
  * @param st - state
  */
-void xml_close_element( struct xml_state *st )
+static void xml_close_element( struct xml_state *st )
 {
 	st->current = st->current->parent;
 }
@@ -361,7 +361,7 @@ void xml_close_element( struct xml_state *st )
  *
  * @param st - state
  */
-void xml_close_tag( struct xml_state *st )
+static void xml_close_tag( struct xml_state *st )
 {
 	st->tag = NULL;
 	st->length = 0;
@@ -375,7 +375,7 @@ void xml_close_tag( struct xml_state *st )
  *
  * @param st - state
  */
-void xml_check_empty( struct xml_state *st )
+static void xml_check_empty( struct xml_state *st )
 {
 	char *p = st->current->key +
 		strlen( st->current->key ) -
@@ -403,7 +403,7 @@ void xml_check_empty( struct xml_state *st )
  *
  * @param st - state
  */
-int xml_parse_tag_name( struct xml_state *st )
+static int xml_parse_tag_name( struct xml_state *st )
 {
 	char *p = st->current->key;
 
@@ -432,7 +432,7 @@ int xml_parse_tag_name( struct xml_state *st )
  * @param st - state
  * @param d - XML data
  */
-const char *xml_parse_tag_body( struct xml_state *st, const char *d )
+static const char *xml_parse_tag_body( struct xml_state *st, const char *d )
 {
 	while( *d )
 	{
@@ -529,7 +529,7 @@ const char *xml_parse_tag_body( struct xml_state *st, const char *d )
  * @param st - state
  * @param d - XML data
  */
-const char *xml_parse_tag_opening( struct xml_state *st, const char *d )
+static const char *xml_parse_tag_opening( struct xml_state *st, const char *d )
 {
 	for( ; *d; ++d )
 	{
@@ -590,7 +590,7 @@ const char *xml_parse_tag_opening( struct xml_state *st, const char *d )
  * @param st - state
  * @param d - XML data
  */
-const char *xml_parse_content( struct xml_state *st, const char *d )
+static const char *xml_parse_content( struct xml_state *st, const char *d )
 {
 	const char *end = d+strcspn( d, "<" );
 
@@ -721,7 +721,7 @@ struct xml_attribute *xml_find_attribute(
  * @param e - element
  * @param seg - path segment
  */
-int xml_attribute_match(
+static int xml_attribute_match(
 	struct xml_element *e,
 	struct xml_path_segment *seg )
 {
@@ -766,7 +766,8 @@ int xml_attribute_match(
  *
  * @param seg - path segment
  */
-struct xml_query_string *xml_add_query_string( struct xml_path_segment *seg )
+static struct xml_query_string *xml_add_query_string(
+	struct xml_path_segment *seg )
 {
 	struct xml_query_string *q = malloc(
 		sizeof( struct xml_query_string ) );
@@ -786,7 +787,7 @@ struct xml_query_string *xml_add_query_string( struct xml_path_segment *seg )
  *
  * @param seg - path segment
  */
-void xml_free_query_strings( struct xml_path_segment *seg )
+static void xml_free_query_strings( struct xml_path_segment *seg )
 {
 	struct xml_query_string *q, *n;
 
@@ -809,7 +810,7 @@ void xml_free_query_strings( struct xml_path_segment *seg )
  * @param path - slash seperated element path with optional
  *               "?key=value" restriction for attributes
  */
-const char *xml_first_path_segment(
+static const char *xml_first_path_segment(
 	struct xml_path_segment *seg,
 	const char *path )
 {
@@ -874,7 +875,7 @@ const char *xml_first_path_segment(
  * @param path - slash seperated element path with optional
  *               "?key=value" restriction for attributes
  */
-const char *xml_last_path_segment(
+static const char *xml_last_path_segment(
 	struct xml_path_segment *seg,
 	const char *path,
 	const char *prev )
@@ -954,7 +955,7 @@ struct xml_element *xml_find( struct xml_element *e, const char *path )
  *               "?key=value" restriction for attributes, may be NULL
  * @param prev - previous position in path, may be NULL
  */
-struct xml_element *xml_find_next_from(
+static struct xml_element *xml_find_next_from(
 	struct xml_element *last,
 	const char *path,
 	const char *prev )
@@ -1019,7 +1020,7 @@ struct xml_element *xml_find_next(
  *
  * @param e - element
  */
-size_t xml_content_len( struct xml_element *e )
+static size_t xml_content_len( struct xml_element *e )
 {
 	size_t s = 0;
 
@@ -1040,7 +1041,7 @@ size_t xml_content_len( struct xml_element *e )
  * @param e - element
  * @param t - target
  */
-void xml_content_cpy(
+static void xml_content_cpy(
 	struct xml_element *e,
 	char **t )
 {
