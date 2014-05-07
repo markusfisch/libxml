@@ -54,8 +54,8 @@ struct xml_state
 	const char *(*parser)( struct xml_state *, const char * );
 };
 
-struct xml_element *xml_parse( const char * );
 int xml_parse_chunk( struct xml_state *, const char * );
+struct xml_element *xml_parse( const char * );
 void xml_free( struct xml_element * );
 
 struct xml_attribute *xml_find_attribute(
