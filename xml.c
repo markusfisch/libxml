@@ -99,8 +99,8 @@ static char *xml_string_append(
 		*dest = n;
 		n += *dest_len;
 
-		strncpy( n, src, src_len );
-		n[src_len] = 0;
+		*n = 0;
+		strncat( n, src, src_len );
 
 		*dest_len += src_len;
 	}
