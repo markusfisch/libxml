@@ -416,8 +416,8 @@ static int xml_parse_tag_name( struct xml_state *st )
 		return 0;
 
 	/* terminate name and skip further white space */
-	*p = 0;
-	p += strspn( ++p, WHITESPACE );
+	*p++ = 0;
+	p += strspn( p, WHITESPACE );
 
 	if( *p &&
 		xml_parse_attributes( st->current, p ) )
