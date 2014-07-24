@@ -769,7 +769,8 @@ static int xml_attribute_match(
 static struct xml_query_string *xml_add_query_string(
 	struct xml_path_segment *seg )
 {
-	struct xml_query_string *q = malloc(
+	struct xml_query_string *q = calloc(
+		1,
 		sizeof( struct xml_query_string ) );
 
 	if( seg->query )
