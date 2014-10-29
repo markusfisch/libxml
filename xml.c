@@ -81,7 +81,7 @@ static char *strndup( const char *s, size_t n )
 {
 	char *r;
 
-	if( !(r = calloc( n+1, sizeof( char )) ) ||
+	if( !(r = calloc( n+1, sizeof( char ) )) ||
 		!memcpy( r, s, n ) )
 		return NULL;
 
