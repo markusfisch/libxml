@@ -70,7 +70,7 @@ static size_t xml_quotedspn( const char *s, char q )
 	return 0;
 }
 
-#ifndef strndup
+#ifdef WIN32
 /**
  * Copies n bytes of given string
  *
