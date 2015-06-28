@@ -70,6 +70,25 @@ static size_t xml_quotedspn( const char *s, char q )
 	return 0;
 }
 
+#ifdef WIN32
+/**
+ * Copies n bytes of given string
+ *
+ * @param s - string to copy
+ * @param n - number of bytes
+ */
+static char *strndup( const char *s, size_t n )
+{
+	char *r;
+
+	if( !(r = calloc( n+1, sizeof( char ) )) ||
+		!memcpy( r, s, n ) )
+		return NULL;
+
+	return r;
+}
+#endif
+
 /**
  * Append string
  *
