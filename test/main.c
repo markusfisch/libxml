@@ -194,6 +194,9 @@ struct search *search_add(
 {
 	struct search *s = malloc( sizeof( struct search ) );
 
+	if( !s )
+		return NULL;
+
 	s->pattern = pattern;
 	s->next = sibling;
 

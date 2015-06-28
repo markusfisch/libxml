@@ -773,6 +773,9 @@ static struct xml_query_string *xml_add_query_string(
 		1,
 		sizeof( struct xml_query_string ) );
 
+	if( !q )
+		return NULL;
+
 	if( seg->query )
 		q->next = seg->query;
 	else
