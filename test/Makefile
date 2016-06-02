@@ -1,7 +1,7 @@
 BIN=xmlparse
 OBJECTS=main.o
 LIBS=-L.. -lxml
-FLAGS=-O2 -I..
+FLAGS=-O2 -I.. -Wall -Wextra
 
 .c.o: $(OBJECTS)
 	$(CC) -c $< -o $@ $(FLAGS)

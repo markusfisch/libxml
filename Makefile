@@ -1,6 +1,6 @@
 LIBNAME=libxml
 OBJECTS=xml.o
-FLAGS=-O2
+FLAGS=-O2 -Wall -Wextra
 
 .c.o:
 	$(CC) -c $< -o $@ $(FLAGS)
