@@ -26,14 +26,12 @@ Reading XML data from STDIN and watch for a certain element:
 
 	#include "xml.h"
 
-	int main( void )
-	{
+	int main(void) {
 		struct xml_state st;
 
-		memset( &st, 0, sizeof( st ) );
+		memset(&st, 0, sizeof(st));
 
-		for( ;; )
-		{
+		for (;;) {
 			char buf[256];
 
 			/* read from stdin */
@@ -41,34 +39,32 @@ Reading XML data from STDIN and watch for a certain element:
 				size_t n = read(
 					STDIN_FILENO,
 					buf,
-					sizeof( buf ) );
+					sizeof(buf));
 
-				if( n < 1 )
+				if (n < 1) {
 					break;
+				}
 
 				buf[n] = 0;
 			}
 
-			if( xml_parse_chunk( &st, buf ) )
-			{
-				xml_free( st.root );
-				fprintf( stderr, "error: parse error\n" );
+			if (xml_parse_chunk(&st, buf)) {
+				xml_free(st.root);
+				fprintf(stderr, "error: parse error\n");
 				return -1;
 			}
 
-			if( st.root )
-			{
+			if (st.root) {
 				struct xml_element *e;
 
-				if( (e = xml_find( st.root, "hello/world" )) )
-				{
-					printf( "Tag found: %s\n", e->key );
+				if ((e = xml_find(st.root, "hello/world"))) {
+					printf("Tag found: %s\n", e->key);
 					break;
 				}
 			}
 		}
 
-		xml_free( st.root );
+		xml_free(st.root);
 
 		return 0;
 	}
@@ -80,22 +76,19 @@ those shortcut functions:
 
 	#include "xml.h"
 
-	int main( void )
-	{
+	int main(void) {
 		struct xml_element *root;
 
-		if( !(root = xml_parse(
-			"<hello><world>Hello World</world></hello>" ) )
-		{
-			char *s = xml_content_find( root, "hello/world" );
+		if (!(root = xml_parse(
+				"<hello><world>Hello World</world></hello>")) {
+			char *s = xml_content_find(root, "hello/world");
 
-			if( s )
-			{
-				printf( "%s\n", s );
-				free( s );
+			if (s) {
+				printf("%s\n", s);
+				free(s);
 			}
 
-			xml_free( root );
+			xml_free(root);
 		}
 
 		return 0;
@@ -108,8 +101,7 @@ The XML elements are parsed into a structure of nested linked lists.
 
 Each XML element becomes a xml_element struct:
 
-	struct xml_element
-	{
+	struct xml_element {
 		/* The tag name if this is a tag element or NULL if this
 		 * element represents character data. */
 		char *key;
@@ -134,8 +126,7 @@ Each XML element becomes a xml_element struct:
 		struct xml_element *next;
 
 		/* First and last attribute. Both may be NULL. */
-		struct xml_attribute
-		{
+		struct xml_attribute {
 			/* Argument name */
 			char *key;
 

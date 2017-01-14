@@ -1,7 +1,6 @@
 #!/bin/bash
 
-test_files()
-{
+test_files() {
 	local F
 
 	for F in ${@:-samples/*}
@@ -11,14 +10,12 @@ test_files()
 	done
 }
 
-test_find()
-{
+test_find() {
 	$BIN - ${@:-?hello/world/country?name=England/city samples/hello.xml}
 	$BIN - ${@:-?hello/world/country/city samples/hello.xml}
 }
 
-all()
-{
+all() {
 	echo '-- test_find --------------------------------------'
 	test_find
 

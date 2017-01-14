@@ -1,8 +1,7 @@
 #ifndef _xml_h_
 #define _xml_h_
 
-struct xml_element
-{
+struct xml_element {
 	/* The tag name if this is a tag element or NULL if this
 	 * element represents character data. */
 	char *key;
@@ -27,8 +26,7 @@ struct xml_element
 	struct xml_element *next;
 
 	/* First and last attribute. Both may be NULL. */
-	struct xml_attribute
-	{
+	struct xml_attribute {
 		/* Argument name */
 		char *key;
 
@@ -40,8 +38,7 @@ struct xml_element
 	} *first_attribute, *last_attribute;
 };
 
-struct xml_state
-{
+struct xml_state {
 	/* the root element */
 	struct xml_element *root;
 
@@ -51,21 +48,21 @@ struct xml_state
 	size_t length;
 	size_t cursor;
 	int empty;
-	const char *(*parser)( struct xml_state *, const char * );
+	const char *(*parser)(struct xml_state *, const char *);
 };
 
-int xml_parse_chunk( struct xml_state *, const char * );
-struct xml_element *xml_parse( const char * );
-void xml_free( struct xml_element * );
+int xml_parse_chunk(struct xml_state *, const char *);
+struct xml_element *xml_parse(const char *);
+void xml_free(struct xml_element *);
 
 struct xml_attribute *xml_find_attribute(
 	struct xml_attribute *,
-	const char * );
+	const char *);
 
-struct xml_element *xml_find( struct xml_element *, const char * );
-struct xml_element *xml_find_next( struct xml_element *, const char * );
+struct xml_element *xml_find(struct xml_element *, const char *);
+struct xml_element *xml_find_next(struct xml_element *, const char *);
 
-char *xml_content( struct xml_element * );
-char *xml_content_find( struct xml_element *, const char * );
+char *xml_content(struct xml_element *);
+char *xml_content_find(struct xml_element *, const char *);
 
 #endif
