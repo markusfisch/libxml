@@ -147,10 +147,4 @@ identify a certain child element by evaluating its attributes, e.g.:
 
 	hello/world?name=earth/country?name=usa&year=2013/city?name=miami
 
-License
--------
-
-libxml is licensed under the [MIT license][4].
-
 [1]: http://www.w3.org/TR/REC-xml/#dt-doctype
-[4]: http://opensource.org/licenses/mit-license.php
