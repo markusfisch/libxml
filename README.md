@@ -77,10 +77,10 @@ those shortcut functions:
 	#include "xml.h"
 
 	int main(void) {
-		struct xml_element *root;
+		struct xml_element *root = xml_parse(
+			"<hello><world>Hello World</world></hello>");
 
-		if (!(root = xml_parse(
-				"<hello><world>Hello World</world></hello>")) {
+		if (root) {
 			char *s = xml_content_find(root, "hello/world");
 
 			if (s) {

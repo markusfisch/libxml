@@ -651,7 +651,7 @@ struct xml_element *xml_parse(const char *data) {
 
 	memset(&st, 0, sizeof(st));
 
-	if (xml_parse_chunk(&st, data) && st.root) {
+	if (!xml_parse_chunk(&st, data) && st.root) {
 		return st.root;
 	}
 

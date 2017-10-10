@@ -212,7 +212,7 @@ int main(int argc, char **argv) {
 	struct search *s = NULL;
 	void *d = dump_xml;
 
-	while (--argc && ++argv)
+	while (--argc && ++argv) {
 		if (**argv == '?') {
 			s = search_add(s, *argv + 1);
 		} else if (**argv == '-') {
@@ -222,6 +222,7 @@ int main(int argc, char **argv) {
 		} else {
 			parse(*argv, s, d);
 		}
+	}
 
 	search_free(s);
 
